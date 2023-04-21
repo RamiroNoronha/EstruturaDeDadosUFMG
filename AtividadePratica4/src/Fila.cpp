@@ -7,10 +7,10 @@ Fila::Fila(){
 }
 
 bool Fila::filavazia(){	
-		return prox == inicio && tamanh() == 0;
+		return size() == 0;
 	}
 void Fila::adiciona(int valor){
-		if(tamanh() < MAXTAM){
+		if(size() < MAXTAM){
 			vet[prox] = valor;
 			prox = (prox + 1) % MAXTAM;
 			tamanho++;
@@ -29,7 +29,7 @@ int Fila::remove(){
 	}
 	}
 	
-int Fila::tamanh(){
+int Fila::size(){
 		return tamanho;
 	}
 

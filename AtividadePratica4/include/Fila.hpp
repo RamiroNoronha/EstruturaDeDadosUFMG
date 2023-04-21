@@ -8,7 +8,7 @@ class Fila{
 		bool filavazia();
 		void adiciona(int valor);
 		int remove();
-		int tamanh();
+		int size();
 		void limpa();
 		void imprimir();
 		~Fila();
