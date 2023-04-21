@@ -1,0 +1,118 @@
+Script started on 2023-04-08 20:18:47-03:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="128" LINES="14"]
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ gcc -g -o c6 c6.c
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrind --tol[Kol=memche[K[Kheck ./c6
+==1791== Memcheck, a memory error detector
+==1791== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1791== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1791== Command: ./c6
+==1791== 
+==1791== Invalid free() / delete / delete[] / realloc()
+==1791==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1791==    by 0x109215: main (c6.c:21)
+==1791==  Address 0x4a47090 is 0 bytes inside a block of size 40 free'd
+==1791==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1791==    by 0x1091B4: resizeArray (c6.c:12)
+==1791==    by 0x109202: main (c6.c:19)
+==1791==  Block was alloc'd at
+==1791==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1791==    by 0x1091EC: main (c6.c:18)
+==1791== 
+==1791== 
+==1791== HEAP SUMMARY:
+==1791==     in use at exit: 60 bytes in 1 blocks
+==1791==   total heap usage: 3 allocs, 3 frees, 116 bytes allocated
+==1791== 
+==1791== LEAK SUMMARY:
+==1791==    definitely lost: 60 bytes in 1 blocks
+==1791==    indirectly lost: 0 bytes in 0 blocks
+==1791==      possibly lost: 0 bytes in 0 blocks
+==1791==    still reachable: 0 bytes in 0 blocks
+==1791==         suppressed: 0 bytes in 0 blocks
+==1791== Rerun with --leak-check=full to see details of leaked memory
+==1791== 
+==1791== For lists of detected and suppressed errors, rerun with: -s
+==1791== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrind --leak-check=full ./c6
+==1792== Memcheck, a memory error detector
+==1792== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1792== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1792== Command: ./c6
+==1792== 
+==1792== Invalid free() / delete / delete[] / realloc()
+==1792==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1792==    by 0x109215: main (c6.c:21)
+==1792==  Address 0x4a47090 is 0 bytes inside a block of size 40 free'd
+==1792==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1792==    by 0x1091B4: resizeArray (c6.c:12)
+==1792==    by 0x109202: main (c6.c:19)
+==1792==  Block was alloc'd at
+==1792==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1792==    by 0x1091EC: main (c6.c:18)
+==1792== 
+==1792== 
+==1792== HEAP SUMMARY:
+==1792==     in use at exit: 60 bytes in 1 blocks
+==1792==   total heap usage: 3 allocs, 3 frees, 116 bytes allocated
+==1792== 
+==1792== 60 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==1792==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1792==    by 0x1091B4: resizeArray (c6.c:12)
+==1792==    by 0x109202: main (c6.c:19)
+==1792== 
+==1792== LEAK SUMMARY:
+==1792==    definitely lost: 60 bytes in 1 blocks
+==1792==    indirectly lost: 0 bytes in 0 blocks
+==1792==      possibly lost: 0 bytes in 0 blocks
+==1792==    still reachable: 0 bytes in 0 blocks
+==1792==         suppressed: 0 bytes in 0 blocks
+==1792== 
+==1792== For lists of detected and suppressed errors, rerun with: -s
+==1792== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrind --leak-check=full ./c6[Kvalgrind --leak-check=full ./c6[2Ptool=memcheck[C[C[C[C[C[12Pgcc -g -o c6 c6.c
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ gcc -g -o c6 c6.cvalgrind --leak-check=full ./c6[2Ptool=memcheck[C[C[C[C[C
+==1801== Memcheck, a memory error detector
+==1801== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1801== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1801== Command: ./c6
+==1801== 
+==1801== Invalid free() / delete / delete[] / realloc()
+==1801==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1801==    by 0x1091C7: resizeArray (c6.c:13)
+==1801==    by 0x10921C: main (c6.c:21)
+==1801==  Address 0x4a47090 is 0 bytes inside a block of size 40 free'd
+==1801==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1801==    by 0x1091B4: resizeArray (c6.c:12)
+==1801==    by 0x10921C: main (c6.c:21)
+==1801==  Block was alloc'd at
+==1801==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1801==    by 0x109206: main (c6.c:20)
+==1801== 
+==1801== 
+==1801== HEAP SUMMARY:
+==1801==     in use at exit: 0 bytes in 0 blocks
+==1801==   total heap usage: 3 allocs, 4 frees, 116 bytes allocated
+==1801== 
+==1801== All heap blocks were freed -- no leaks are possible
+==1801== 
+==1801== For lists of detected and suppressed errors, rerun with: -s
+==1801== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrind --tool=memcheck ./c6[12Pgcc -g -o c6 c6.c
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ gcc -g -o c6 c6.cvalgrind --tool=memcheck ./c6[12Pgcc -g -o c6 c6.cvalgrind --tool=memcheck ./c6[12Pgcc -g -o c6 c6.cvalgrind --tool=memcheck ./c6
+==1813== Memcheck, a memory error detector
+==1813== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1813== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1813== Command: ./c6
+==1813== 
+==1813== 
+==1813== HEAP SUMMARY:
+==1813==     in use at exit: 0 bytes in 0 blocks
+==1813==   total heap usage: 3 allocs, 3 frees, 116 bytes allocated
+==1813== 
+==1813== All heap blocks were freed -- no leaks are possible
+==1813== 
+==1813== For lists of detected and suppressed errors, rerun with: -s
+==1813== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ exit
+exit
+
+Script done on 2023-04-08 20:28:28-03:00 [COMMAND_EXIT_CODE="0"]

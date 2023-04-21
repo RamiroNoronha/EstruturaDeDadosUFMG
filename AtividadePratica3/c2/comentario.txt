@@ -1,0 +1,10 @@
+Durante a analise do código pelo valgrind, utilizei o comando de verificação de memória que relatou
+o seguinte erro: Conditional jump or move depends on uninitialised e Use of uninitialised value of size 8.
+Os quais, significam, respectivamente, que não houve um pulo condicional e que usou uma memória não 
+inicializada, e a outra, indica, de forma mais específica que a memória não inicializada tinha 8 bytes.
+Ao verificar o código, o programa inicializava os valores de um vetor de tamanho dez, dos indices 0
+a 8, faltando o indice 9 que foi acessado posteriormente na linha 11. Exitem duas soluções possíveis
+que foram testadas, em que o valgrind não indetificou erro. A primeira foi inicializar dos indices de 
+0 a 8 e utilizar só esses valores inicializados, mesmo deixando memória sem ser usada, pois seria 
+liberada posteriormente. Ou inicializar todos os indices do vetor e usar todos eles. Optei pela segunda 
+solução.

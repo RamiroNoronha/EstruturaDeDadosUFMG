@@ -1,0 +1,2 @@
+Durante a análise do código pelo valgrind, ao rodar o comando valgrind "--tool=memcheck", percebi que existiram
+duas alocações de memória que não foram liberadas, então eu utilizei o comando free para liberá-las.

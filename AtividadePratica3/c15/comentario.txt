@@ -1,0 +1,2 @@
+Ao analisar o código usando gdb, percebe-se que a declaração da variável 'a' dentro do laço for, torna
+a chamada de função inútil. Ao declarar a variável 'a' antes do for, a função passa a exercer seu real papel.

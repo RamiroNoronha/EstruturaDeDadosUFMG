@@ -1,0 +1,43 @@
+Script started on 2023-04-08 21:04:56-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="128" LINES="14"]
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ gcc -g -o c8 c8.c
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrind --tool=memcheck ./c8
+==1898== Memcheck, a memory error detector
+==1898== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1898== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1898== Command: ./c8
+==1898== 
+==1898== Invalid read of size 1
+==1898==    at 0x1091D2: main (c8.c:9)
+==1898==  Address 0x4a470ba is 0 bytes after a block of size 26 alloc'd
+==1898==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1898==    by 0x1091B1: main (c8.c:6)
+==1898== 
+==1898== 
+==1898== HEAP SUMMARY:
+==1898==     in use at exit: 0 bytes in 0 blocks
+==1898==   total heap usage: 2 allocs, 2 frees, 53 bytes allocated
+==1898== 
+==1898== All heap blocks were freed -- no leaks are possible
+==1898== 
+==1898== For lists of detected and suppressed errors, rerun with: -s
+==1898== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrind --tool=memcheck ./c8[12Pgcc -g -o c8 c8.c
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ gcc -g -o c8 c8.cvalgrind --tool=memcheck ./c8
+==1910== Memcheck, a memory error detector
+==1910== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1910== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1910== Command: ./c8
+==1910== 
+==1910== 
+==1910== HEAP SUMMARY:
+==1910==     in use at exit: 0 bytes in 0 blocks
+==1910==   total heap usage: 2 allocs, 2 frees, 54 bytes allocated
+==1910== 
+==1910== All heap blocks were freed -- no leaks are possible
+==1910== 
+==1910== For lists of detected and suppressed errors, rerun with: -s
+==1910== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ exit
+exit
+
+Script done on 2023-04-08 21:06:08-03:00 [COMMAND_EXIT_CODE="0"]

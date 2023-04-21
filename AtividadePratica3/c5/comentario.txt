@@ -1,0 +1,5 @@
+Durante a análise do código pelo valgrind, ao rodar o comando valgrind "--tool=memcheck", obtive o retorno 
+"in use at exit: 4,000 bytes in 1 blocks", ao rodar o comando "--leak-check=full", recebi a seguinte
+mensagem: "4,000 bytes in 1 blocks are definitely lost in loss record 1 of 1" e "by 0x1091E7: main (c5.c:9)",
+então, verificando o código, percebi que na linha 9 ocorria uma alocação de memória sem liberação posteriormente,
+então adicionei o comando free para liberar a memória.

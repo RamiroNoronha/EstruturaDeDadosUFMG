@@ -1,0 +1,3 @@
+Após a analíse do código utilizando valgrind, percebe-se pela saída "Integer divide by zero at address 0x1002D47E1F",
+e pela pilha "by 0x109170: calc (c16.c:15)", "at 0x10913B: actual_calc (c16.c:6)", que estava ocorrendo uma 
+divisão por 0, por causa da variável b.

@@ -1,0 +1,5 @@
+Durante a análise do código pelo valgrind, ao rodar o comando valgrind "--tool=memcheck", obtive o retorno
+"Invalid write of size 1" e "Address 0x4a4705a is 0 bytes after a block of size 26 alloc'd", pois 
+na linha 10 estava tentando acessar valores que não foram alocados para finalizar a string, para corrigir isso,
+mudei o laço for para for(uint8_t i = 0; i < 25; i++) e acessei o último endereço de memória para acrescentar
+o '/0'.

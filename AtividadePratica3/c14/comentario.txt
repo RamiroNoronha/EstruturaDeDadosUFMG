@@ -1,0 +1,2 @@
+O único problema nesse código que foi percebido ao rodar o valgrind --tool=memcheck, foi que o fact não havia
+sido inicializado antes de começar o laço for para o calculo do fatorial.

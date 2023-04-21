@@ -1,0 +1,34 @@
+Script started on 2023-04-08 13:37:37-03:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="148" LINES="35"]
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ gcc -g -o c1_corrigido c1_corrigico.c
+[01m[Kgcc:[m[K [01;31m[Kerror: [m[Kc1_corrigico.c: No such file or directory
+[01m[Kgcc:[m[K [01;31m[Kfatal error: [m[Kno input files
+compilation terminated.
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ gcc _g [K[K[K-g -o c1_corrigido c1_corrigido.c
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrid --tool+[K=memcheck ./c1_corrigido
+
+Command 'valgrid' not found, did you mean:
+
+  command 'valgrind' from deb valgrind (1:3.15.0-1ubuntu9.1)
+
+Try: sudo apt install <deb name>
+
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ valgrind --tool=memcha[Keck ./c1_corrigido
+==1405== Memcheck, a memory error detector
+==1405== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1405== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==1405== Command: ./c1_corrigido
+==1405== 
+==1405== 
+==1405== HEAP SUMMARY:
+==1405==     in use at exit: 0 bytes in 0 blocks
+==1405==   total heap usage: 1 allocs, 1 frees, 40 bytes allocated
+==1405== 
+==1405== All heap blocks were freed -- no leaks are possible
+==1405== 
+==1405== For lists of detected and suppressed errors, rerun with: -s
+==1405== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ ^C
+]0;ramiro@Ramiro: /mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[01;32mramiro@Ramiro[00m:[01;34m/mnt/d/UFMG-TrabalhosExercicios/UFMG - Estrutura de Dados/AtividadePratica3[00m$ exit
+exit
+
+Script done on 2023-04-08 13:39:04-03:00 [COMMAND_EXIT_CODE="130"]

@@ -1,0 +1,4 @@
+Durante a análise do código pelo valgrind, ao rodar o comando valgrind "--tool=memcheck", obtive o retorno
+"Invalid write of size 1" e "Address 0x4a470ba is 0 bytes after a block of size 26 alloc'd", pois na linha
+9, estava tentando acessar um endereço errado de source. Então aumentei o espaço de souce para o for poder
+acontecer normalmente.

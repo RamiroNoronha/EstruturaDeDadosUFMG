@@ -1,0 +1,8 @@
+Durante a análise do código pelo valgrind, ao rodar o comando valgrind "--tool=memcheck", obtive o retorno
+"in use at exit: 3,600 bytes in 9 blocks", "total heap usage: 10 allocs, 1 frees, 4,000 bytes allocated" e 
+"definitely lost: 3,600 bytes in 9 blocks", indicando que houve um vazamento de 3,600 bytes, por ter ocorrido
+10 alocações e somente uma liberação de memória. Fui aconselhado pelo valgrind a rodar
+o seguinte comando : "--leak-check=full", o qual deu detalhes sobre a linha em que essas alocações estavam
+sendo feitas, a saber a 9. Visto isso, tirei o comando free que estava na linha 11, fora do laço for, e coloquei
+na linha 10 dentro do laço for. Ao fazer isso e rodar o comando "--tool=memcheck", obtive o retorno de que
+toda a memória alocada havia sido liberada.

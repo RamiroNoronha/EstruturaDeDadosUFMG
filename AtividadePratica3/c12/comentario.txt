@@ -1,0 +1,3 @@
+Durante a análise do código pelo valgrind, ao rodar o comando valgrind "--tool=memcheck", recebi a seguinte
+mensagem "Conditional jump or move depends on uninitialised value(s)", pois estava fazendo um if na variável
+x sem inicializá-la, então coloquei um scanf antes dela para inicializá-la.

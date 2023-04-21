@@ -1,0 +1,3 @@
+Após analisar o código por meio do valgrind, percebi que na linha 22 do printSum estava acontecendo uma escrita
+inválida, ao perceber que era no ponteiro buf, percebi que ele não apontava para nada e fiz as correções 
+necessárias.
