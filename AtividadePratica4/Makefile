@@ -14,6 +14,9 @@ OBJS = $(OBJ_DIR)/Fila.o $(OBJ_DIR)/Pilha.o $(OBJ_DIR)/main.o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)
 
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)
+
 $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@
 
