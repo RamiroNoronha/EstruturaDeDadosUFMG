@@ -1,5 +1,6 @@
 #include <string>
 template<typename T> 
+#pragma once
 class ArvoreBinaria
 {
     protected:
