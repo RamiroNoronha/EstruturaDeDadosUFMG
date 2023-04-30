@@ -2,14 +2,30 @@
 template<typename T> 
 class ArvoreBinaria
 {
-    private:
+    protected:
+        // struct No que será o No da arvore binária
         struct No{
             public:
             No(): esq(nullptr), dir(nullptr){};
             T getItem(){
                 return item;
             }
-            private:
+            void putItem(T item){
+                this->item = item;
+            }
+            No* getEsq(){
+                return esq;
+            }
+            No* getDir(){
+                return dir;
+            }
+            void putEsq(No* esq){
+                this->esq = esq;
+            }
+            void putDir(No* dir){
+                this->dir = dir;
+            }
+            public:
             T item;
             No *esq;
             No *dir;
@@ -17,23 +33,19 @@ class ArvoreBinaria
         };
     public: 
         ArvoreBinaria() : raiz(nullptr){};
-        ArvoreBinaria(std::string){
-            
-        }
         ~ArvoreBinaria(){
             Limpa();
         };
 
-        void Insere(T item){
+        virtual void Insere(T item){
             InsereRecursivo(raiz, item);
         };
-        void Caminha();
-        void Limpa(){
+        virtual void Limpa(){
             ApagaRecursivo(raiz);
             raiz = nullptr;
         };
 
-    private:
+    protected:
         void InsereRecursivo(No* &p, T item){
             if(p==nullptr){
                 p = new No();
@@ -47,13 +59,6 @@ class ArvoreBinaria
             }
         };
 
-        void InserePosFixa(T item)
-        {
-
-        }
-        {
-
-        }
         void ApagaRecursivo(No* p){
             if(p!= nullptr){
                 ApagaRecursivo(p->esq);
@@ -77,9 +82,11 @@ class ArvoreBinaria
             }
         };
         void PosOrdem(No* p){
-            PosOrdem(p->esq);    
-            PosOrdem(p->dir);
-            std::cout << p->getItem() << std::endl;
+            if(p != nullptr){
+                PosOrdem(p->esq);    
+                PosOrdem(p->dir);
+                std::cout << "valor do item: " <<p->getItem() << std::endl;
+            }
         };
 
         No *raiz;
