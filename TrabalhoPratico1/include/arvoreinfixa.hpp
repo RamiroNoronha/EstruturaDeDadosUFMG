@@ -19,8 +19,8 @@ class ArvoreInFixa : public ArvoreBinaria<T> {
         return infixa;
     }
     // Método que calcula o resultado da expressão
-    double calcularResultado(){
-        Pilha<double> pilhaPosOrdem;
+    long double calcularResultado(){
+        Pilha<long double> pilhaPosOrdem;
         CalcularValorRecursivo(this->raiz, pilhaPosOrdem);
         return pilhaPosOrdem.desempilha();
     }  
@@ -68,7 +68,7 @@ class ArvoreInFixa : public ArvoreBinaria<T> {
     // # Parâmetros
     // - raiz: Nó que será analisado
     // - pilha: pilha que guardará o resultado da expressão
-    void CalcularValorRecursivo(typename ArvoreBinaria<T>::No* &raiz, Pilha<double> &pilha){
+    void CalcularValorRecursivo(typename ArvoreBinaria<T>::No* &raiz, Pilha<long double> &pilha){
         if(raiz != nullptr){
             if(isOperador(raiz->getItem())){
                 CalcularValorRecursivo(raiz->esq, pilha);

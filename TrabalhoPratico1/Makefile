@@ -1,5 +1,5 @@
 CXX = g++
-CFLAGS = -Wall -Wextra -pedantic -std=c++11
+CFLAGS = -Wall -Wextra -pedantic -std=c++17
 
 SRC_DIR = src
 INC_DIR = include
