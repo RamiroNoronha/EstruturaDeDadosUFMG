@@ -4,7 +4,7 @@ template<typename T>
 class ArvoreBinaria
 {
     protected:
-        // struct No que será o No da arvore binária
+        // struct No que representará o no da arvore binária
         struct No{
             public:
             No(): esq(nullptr), dir(nullptr){};
@@ -14,22 +14,10 @@ class ArvoreBinaria
             void putItem(T item){
                 this->item = item;
             }
-            No* getEsq(){
-                return esq;
-            }
-            No* getDir(){
-                return dir;
-            }
-            void putEsq(No* esq){
-                this->esq = esq;
-            }
-            void putDir(No* dir){
-                this->dir = dir;
-            }
-            public:
-            T item;
             No *esq;
             No *dir;
+            private: 
+            T item;
             friend class ArvoreBinaria;
         };
     public: 
@@ -47,6 +35,7 @@ class ArvoreBinaria
         };
 
     protected:
+        // Método dado em aula de inserir de forma recursiva
         void InsereRecursivo(No* &p, T item){
             if(p==nullptr){
                 p = new No();
@@ -59,7 +48,7 @@ class ArvoreBinaria
                 }
             }
         };
-
+        // Método dado em aula que apaga todos os elementos da árvore
         void ApagaRecursivo(No* p){
             if(p!= nullptr){
                 ApagaRecursivo(p->esq);
@@ -68,6 +57,7 @@ class ArvoreBinaria
             }
         };
         void PorNivel();
+        // Método dado em aula de imprimir a arvore PreOrdem
         void PreOrdem(No* p){
             if(p != nullptr){
                 std::cout << p->getItem() << std::endl;
@@ -75,6 +65,7 @@ class ArvoreBinaria
                 PreOrdem(p->dir);
             }
         };
+        // Método dado em aula de imprimir a arvore InOrdem
         void InOrdem(No* p){
             if(p != nullptr){
                 InOrdem(p->esq);
@@ -82,6 +73,7 @@ class ArvoreBinaria
                 InOrdem(p->dir);
             }
         };
+        // Método dado em aula de imprimir a arvore PosOrdem
         void PosOrdem(No* p){
             if(p != nullptr){
                 PosOrdem(p->esq);    
@@ -89,7 +81,7 @@ class ArvoreBinaria
                 std::cout << "valor do item: " <<p->getItem() << std::endl;
             }
         };
-
+        // Raiz da arvore
         No *raiz;
 
 };
