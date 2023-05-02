@@ -186,11 +186,10 @@ void limpaEspaco(std::string &texto){
 // No final imprirá "TOTAL DE CASOS FALHOS: <total>"
 
 void testes(std::string caminhoDiretorio){
-    const std::string diretorio = caminhoDiretorio;
     // Contador de casos errados
     int totalCasosFalhos = 0;
     // Esse for caminha por todos os arquivos do diretório
-    for (const auto& entrada : std::filesystem::directory_iterator(diretorio)) {
+    for (const auto& entrada : std::filesystem::directory_iterator(caminhoDiretorio)) {
         // inteiro que conta para verificar se falhou nos dois casos de teste
         int teste = 0;
         // Boleano que verifica se a conversão funcionou
@@ -203,10 +202,10 @@ void testes(std::string caminhoDiretorio){
             std::string arquivo = entrada.path().string();
             lerArquivo(texto, opcao,valor, arquivo);
             if(opcao == "POSFIXA"){
-                ArvorePosFixa<std::string> minhaArvore;
-                preencheArvorePosFixa(texto, minhaArvore);
-                std::string notacao = minhaArvore.TranformarEmInFixa();
-                double resultado = minhaArvore.calcularResultado();
+                ArvorePosFixa<std::string> arvorePosFixa;
+                preencheArvorePosFixa(texto, arvorePosFixa);
+                std::string notacao = arvorePosFixa.TranformarEmInFixa();
+                double resultado = arvorePosFixa.calcularResultado();
                 // Verifica a diferença do valor capturado pelo lerArquivo e o resultado calculado a partir do calcularResultado
                 if(std::abs(valor - resultado) > 1){
                     teste++;
@@ -264,8 +263,48 @@ void testes(std::string caminhoDiretorio){
     std::cout << "TOTAL DE CASOS FALHOS: " << totalCasosFalhos << std::endl;
 }
 
-int main() {
-    testes("Entradas_TP1");
+void criarArquivo(std::string tipo,std::string tipoContrario ,std::string expressao, std::string resultado, double valor, std::string nomeArquivo) {
+    std::ofstream arquivo(nomeArquivo);
+    if (arquivo.is_open()) {
+        arquivo << tipo << "  " << expressao << std::endl;
+        arquivo << tipoContrario << "  " << resultado << std::endl;
+        arquivo << "RESOLVE # " << valor << std::endl;
+        arquivo.close();
+    }
+    else {
+        std::cout << "ERRO AO CRIAR ARQUIVO.\n";
+    }
+}
+
+void implementacao(std::string arquivo){
+    try{
+        std::string expressao;
+        std::string tipo;
+        long double valor;
+        lerArquivo(expressao, tipo, valor, arquivo);
+        if(tipo == "INFIXA"){
+            ArvoreInFixa<std::string> arvoreInfixa;
+            preencherArvoreInfixa(expressao, arvoreInfixa);
+            std::string notacao = arvoreInfixa.TranformarEmPosFixa();
+            double resultado = arvoreInfixa.calcularResultado();
+            criarArquivo(tipo,"POSFIXA" ,expressao, notacao, resultado, "resultado.txt");
+        } else if(tipo == "POSFIXA"){
+            ArvorePosFixa<std::string> arvorePosFixa;
+            preencheArvorePosFixa(expressao, arvorePosFixa);
+            std::string notacao = arvorePosFixa.TranformarEmInFixa();
+            double resultado = arvorePosFixa.calcularResultado();
+            criarArquivo(tipo,"INFIXA" ,expressao, notacao, resultado, "resultado.txt");
+        }  
+    } catch(Erro erro){
+        std::cout << erro.getMessage() << std::endl;
+    } catch(...){
+        std::cout << "Erro desconhecido" << std::endl;
+    }
+
+}
+int main(int argc, char *argv[]) {
+    std::string caminho = argv[1];
+    implementacao(caminho);
 }
 
 
