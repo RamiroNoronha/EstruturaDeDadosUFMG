@@ -29,7 +29,7 @@ clean:
 
 .PHONY: run
 run: $(TARGET)
-	./$(TARGET)
+	./$(TARGET) $(ARGS)
 
 .PHONY: valgrind
 valgrind: $(TARGET)
