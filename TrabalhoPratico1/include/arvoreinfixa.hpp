@@ -1,6 +1,8 @@
 #include "arvore.hpp"
 #include <typeinfo>
 #include "erro.hpp"
+#pragma once
+// Estrutura de dados para armazenar a expressão infixa em formato de arvore
 template<typename T> 
 class ArvoreInFixa : public ArvoreBinaria<T> {
     public:

@@ -1,6 +1,7 @@
 #include "arvore.hpp"
 #include <typeinfo>
 #include "erro.hpp"
+#pragma once
 // Estrutura de dados para armazenar a expressão pós-fixada em formato de arvore
 template<typename T>
 class ArvorePosFixa : public ArvoreBinaria<T> {

@@ -50,7 +50,7 @@ void preencheArvorePosFixa(std::string texto, ArvorePosFixa<std::string> &arvore
     }
  }
 
- // Função que preenche uma ArvoreInFixa a partir da entrada e de forma recursiva
+// Função que preenche uma ArvoreInFixa a partir da entrada e de forma recursiva
 // # Parâmetros
 // - texto: string que recebe a entrada em formato de texto
 // - arvore: ArvoreInFixa que é passada por referência para guarda a expressão em formato infixo
@@ -123,12 +123,14 @@ void preencherArvoreInfixa(std::string texto, ArvoreInFixa<std::string> &arvore)
     }
 }
 
-
+// Função responsável por ler o arquivo e guardar a expressão e o tipo de expressão dele, além do resultado
+// # Parâmetros
+// expressão: Será a expressão do arquivo em formato INFIXO ou POSFIXO
+// tipo: Será o tipo da expressão, podendo ser INFIXO ou POSFIXO
+// valor: resultado do arquivo que fica após a expressão "RESOLVE #"
 void lerArquivo(std::string &expressao, std::string &tipo,long double &valor, std::string caminho){
     std::ifstream arquivo(caminho);
     std::string linha;
-    //std::string tipo;
-    //double valor = 0;
     if (arquivo.is_open()) {
         // Lê linha por linha até o final do arquivo
         while (std::getline(arquivo, linha)) {
@@ -151,7 +153,6 @@ void lerArquivo(std::string &expressao, std::string &tipo,long double &valor, st
                 }
             } else if (linha.find("RESOLVE #") != std::string::npos) { // Verifica se a linha contém a substring "RESOLVE #"
                         // Extrai o valor após a substring "RESOLVE #"
-
                         std::string valor_str = linha.substr(linha.find("RESOLVE #") + 9);
                         std::istringstream iss_valor(valor_str);
                         iss_valor >> valor;
@@ -164,6 +165,10 @@ void lerArquivo(std::string &expressao, std::string &tipo,long double &valor, st
         throw Erro("ERRO AO ABRIR ARQUIVO");
     }
 }
+// Limpa os espaços de uma expressão para comparação
+// Exemplo: ( 3 ) + ( 5 ) após limpar ficará (3)+(5)
+// # Parâmetros
+// texto: Texto que perderá os espaços
 void limpaEspaco(std::string &texto){
     for (int i = 0; i < texto.length(); i++) {
         if (texto[i] == ' ') {
@@ -173,11 +178,23 @@ void limpaEspaco(std::string &texto){
     }
 }
 
-void testes(std::string nomeDiretorio){
-    const std::string diretorio = nomeDiretorio;
+
+// Função que faz testes em arquivos no formato dado pelo professor
+// # Parâmetros
+// caminhoDiretorio: caminho do diretório que tem os arquivos que serão testados
+// Em caso de falha, irá imprimir no terminal : "Arquivo: <nome_arquivo> DEU ERRADO"
+// No final imprirá "TOTAL DE CASOS FALHOS: <total>"
+
+void testes(std::string caminhoDiretorio){
+    const std::string diretorio = caminhoDiretorio;
+    // Contador de casos errados
+    int totalCasosFalhos = 0;
+    // Esse for caminha por todos os arquivos do diretório
     for (const auto& entrada : std::filesystem::directory_iterator(diretorio)) {
+        // inteiro que conta para verificar se falhou nos dois casos de teste
         int teste = 0;
-        bool conversaoFuncionou = false;
+        // Boleano que verifica se a conversão funcionou
+        bool conversaoFuncionou = true;
         if (std::filesystem::is_regular_file(entrada)) {
             try{
             std::string texto = "";
@@ -190,43 +207,50 @@ void testes(std::string nomeDiretorio){
                 preencheArvorePosFixa(texto, minhaArvore);
                 std::string notacao = minhaArvore.TranformarEmInFixa();
                 double resultado = minhaArvore.calcularResultado();
-
+                // Verifica a diferença do valor capturado pelo lerArquivo e o resultado calculado a partir do calcularResultado
                 if(std::abs(valor - resultado) > 1){
                     teste++;
                 }
-
+                // Criação de uma engenharia reversa para voltar a expressão em seu formato original após a conversão
                 ArvoreInFixa<std::string> arvoreInfixa;
                 preencherArvoreInfixa(notacao, arvoreInfixa);
                 std::string resultadoReverso = arvoreInfixa.TranformarEmPosFixa();
                 limpaEspaco(resultadoReverso);
                 limpaEspaco(texto);
+                // Comparação da expressão original e e o resultadoReverso
                 if(resultadoReverso != texto){
                     teste++;
                     conversaoFuncionou = false;
                 }
+                // Caso não atenda as existências do teste 
                 if(teste > 1 || !conversaoFuncionou){
                     std::cout << "Arquivo: " << arquivo  << " DEU ERRADO" << std::endl;
+                    totalCasosFalhos++;
                 }
             } else if(opcao == "INFIXA"){
                 ArvoreInFixa<std::string> arvoreInfixa;
                 preencherArvoreInfixa(texto, arvoreInfixa);
                 std::string notacao = arvoreInfixa.TranformarEmPosFixa();
                 double resultado = arvoreInfixa.calcularResultado();
+                // Verifica a diferença do valor capturado pelo lerArquivo e o resultado calculado a partir do calcularResultado
                if(std::abs(valor - resultado) > 1){
                     teste++;
                 }
-
+                // Criação de uma engenharia reversa para voltar a expressão em seu formato original após a conversão
                 ArvorePosFixa<std::string> arvorePosFixa;
                 preencheArvorePosFixa(notacao, arvorePosFixa);
                 std::string resultadoReverso = arvorePosFixa.TranformarEmInFixa();
                 limpaEspaco(resultadoReverso);
                 limpaEspaco(texto);
+                // Comparação da expressão original e e o resultadoReverso
                 if(resultadoReverso != texto){
                     teste++;
                     conversaoFuncionou = false;
                 }
+                // Caso não atenda as existências do teste 
                 if(teste > 1 || !conversaoFuncionou){
                     std::cout << "Arquivo: " << arquivo  << " DEU ERRADO" << std::endl;
+                    totalCasosFalhos++;
                 }
             }
             }catch(Erro erro){
@@ -236,108 +260,12 @@ void testes(std::string nomeDiretorio){
             }
         }
     }
+
+    std::cout << "TOTAL DE CASOS FALHOS: " << totalCasosFalhos << std::endl;
 }
+
 int main() {
-
     testes("Entradas_TP1");
-    // try{
-    //     std::string texto = "";
-    //     double valor = 0;
-    //     std::string opcao = "";
-    //     lerArquivo(texto, opcao,valor,"src/entrada.txt");
-    //     if(opcao == "POSFIXA"){
-    //         ArvorePosFixa<std::string> minhaArvore;
-    //         preencheArvorePosFixa(texto, minhaArvore);
-    //         std::string notacao = minhaArvore.TranformarEmInFixa();
-    //         std::cout << "expressão infixa: " << notacao << std::endl;
-    //         double resultado = minhaArvore.calcularResultado();
-    //         std::cout << "valor resultado: " << std::setprecision(6) << std::fixed << resultado << std::endl;
-    //     } else if(opcao == "INFIXA"){
-    //         ArvoreInFixa<std::string> arvoreInfixa;
-    //         preencherArvoreInfixa(texto, arvoreInfixa);
-    //         std::string notacao = arvoreInfixa.TranformarEmPosFixa();
-    //         std::cout << "expressão posfixa:  " << notacao << std::endl;
-    //         double resultado = arvoreInfixa.calcularResultado();
-    //         std::cout << "valor resultado: " << std::setprecision(6) << std::fixed << resultado << std::endl;
-    //     }
-    // } catch(Erro erro){
-    //     std::cout << erro.getMessage() << std::endl;
-    // } catch(...){
-    //     std::cout << "Erro desconhecido" << std::endl;
-    // }
-
-    // try{
-    //     std::string texto = " 2 + - 4 3";
-    //     ArvorePosFixa<std::string> minhaArvore;
-    //     preencheArvorePosFixa(texto, minhaArvore);
-    //     std::string notacao = minhaArvore.TranformarEmInFixa();
-    //     std::cout << notacao << std::endl;
-    //     double resultado = minhaArvore.calcularResultado();
-    //     std::cout << "valor resultado: " << resultado << std::endl;
-    // } catch(Erro erro){
-    //     std::cout << erro.getMessage() << std::endl;
-    // } catch(...){
-    //     std::cout << "Erro desconhecido" << std::endl;
-    // }
-
-
-    // try{
-    //     std::string texto = "( ( ( ( 2.071122 ) + ( ( ( 1.036112 ) / ( 9.212616 ) ) * ( ( 7.151603 ) * ( 2.203524 ) ) ) ) / ( ( ( 9.007030 ) + ( 2.889450 ) ) - ( 1.554032 ) ) ) * ( ( 3.186413 ) / ( 7.180392 ) ) )";
-    //     ArvoreInFixa<std::string> arvoreInfixa;
-    //     preencherArvoreInfixa(texto, arvoreInfixa);
-    //     std::string resultado = arvoreInfixa.TranformarEmPosFixa();
-    //     std::cout << "meu resultado " << resultado << std::endl;
-    //     double valor = arvoreInfixa.calcularResultado();
-    //     std::cout << "valor: " << valor << std::endl;
-    // } catch(Erro erro){
-    //     std::cout << erro.getMessage() << std::endl;
-    // } catch(...){
-    //     std::cout << "Erro desconhecido" << std::endl;
-    // }
-
-
-
-    // std::ifstream arquivo("src/entrada2.txt");
-    // std::string linha;
-    // std::string tipo, expressao;
-    // double valor = 0;
-    // if (arquivo.is_open()) {
-    //     // Lê linha por linha até o final do arquivo
-    //     while (std::getline(arquivo, linha)) {
-    //         // Verifica se a linha começa com "LER"
-    //         if (linha.substr(0, 3) == "LER") {
-    //             // Divide a linha em palavras separadas por espaço
-    //             std::istringstream iss(linha);
-    //             std::string palavra;
-    //             int cont = 0;
-    //             while (iss >> palavra) {
-    //                 // A segunda palavra será o tipo
-    //                 if (cont == 1) {
-    //                     tipo = palavra;
-    //                 }
-    //                 // As palavras seguintes até a palavra "POSFIXA" ou "RESOLVE" serão a expressão
-    //                 else if (cont > 1 && palavra != "POSFIXA" && palavra != "RESOLVE") {
-    //                     expressao += palavra + " ";
-    //                 }
-    //                 // A palavra seguinte após "RESOLVE" será o valor
-    //                 else if (palavra == "RESOLVE #") {
-    //                     iss >> valor;
-    //                     std::cout << valor << std::endl;
-    //                     break;
-    //                 }
-    //                 cont++;
-    //             }
-    //         }
-    //     }
-    //     arquivo.close();
-    //     std::cout << "Tipo: " << tipo << std::endl;
-    //     std::cout << "Expressao: " << expressao << std::endl;
-    //     std::cout << "Valor: " << valor << std::endl;
-    // }
-    // else {
-    //     std::cout << "Nao foi possivel abrir o arquivo." << std::endl;
-    // }
-    // return 0;
 }
 
 
