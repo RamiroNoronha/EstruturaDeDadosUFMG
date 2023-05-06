@@ -128,6 +128,7 @@ void preencherArvoreInfixa(std::string texto, ArvoreInFixa<std::string> &arvore)
 // expressão: Será a expressão do arquivo em formato INFIXO ou POSFIXO
 // tipo: Será o tipo da expressão, podendo ser INFIXO ou POSFIXO
 // valor: resultado do arquivo que fica após a expressão "RESOLVE #"
+// caminho: caminho do arquivo que será lido
 void lerArquivo(std::string &expressao, std::string &tipo,long double &valor, std::string caminho){
     std::ifstream arquivo(caminho);
     std::string linha;
@@ -162,7 +163,7 @@ void lerArquivo(std::string &expressao, std::string &tipo,long double &valor, st
         arquivo.close();
     }
     else {
-        throw Erro("ERRO AO ABRIR ARQUIVO");
+        throw Erro("ERRO AO ABRIR ARQUIVO " + caminho);
     }
 }
 // Limpa os espaços de uma expressão para comparação
@@ -180,11 +181,10 @@ void limpaEspaco(std::string &texto){
 
 
 // Função que faz testes em arquivos no formato dado pelo professor
-// # Parâmetros
-// caminhoDiretorio: caminho do diretório que tem os arquivos que serão testados
 // Em caso de falha, irá imprimir no terminal : "Arquivo: <nome_arquivo> DEU ERRADO"
 // No final imprirá "TOTAL DE CASOS FALHOS: <total>"
-
+// # Parâmetros
+// caminhoDiretorio: caminho do diretório que tem os arquivos que serão testados
 void testes(std::string caminhoDiretorio){
     // Contador de casos errados
     int totalCasosFalhos = 0;
@@ -272,29 +272,34 @@ void criarArquivo(std::string tipo,std::string tipoContrario ,std::string expres
         arquivo.close();
     }
     else {
-        std::cout << "ERRO AO CRIAR ARQUIVO.\n";
+        std::cout << "ERRO AO CRIAR\\OU ABRIR ARQUIVO \n" << nomeArquivo << std::endl;
     }
 }
 
-void implementacao(std::string arquivo){
+void implementacao(std::string arquivoEntrada, std::string arquivoSaida){
     try{
         std::string expressao;
         std::string tipo;
         long double valor;
-        lerArquivo(expressao, tipo, valor, arquivo);
+        lerArquivo(expressao, tipo, valor, arquivoEntrada);
         if(tipo == "INFIXA"){
             ArvoreInFixa<std::string> arvoreInfixa;
             preencherArvoreInfixa(expressao, arvoreInfixa);
             std::string notacao = arvoreInfixa.TranformarEmPosFixa();
             double resultado = arvoreInfixa.calcularResultado();
-            criarArquivo(tipo,"POSFIXA" ,expressao, notacao, resultado, "resultado.txt");
+            criarArquivo(tipo,"POSFIXA" ,expressao, notacao, resultado, arquivoSaida);
+            std::cout << "ARQUIVO CRIADO COM SUCESSO NO LOCAL " << arquivoSaida << std::endl;
         } else if(tipo == "POSFIXA"){
             ArvorePosFixa<std::string> arvorePosFixa;
             preencheArvorePosFixa(expressao, arvorePosFixa);
             std::string notacao = arvorePosFixa.TranformarEmInFixa();
             double resultado = arvorePosFixa.calcularResultado();
-            criarArquivo(tipo,"INFIXA" ,expressao, notacao, resultado, "resultado.txt");
-        }  
+            criarArquivo(tipo,"INFIXA" ,expressao, notacao, resultado, arquivoSaida);
+            std::cout << "ARQUIVO CRIADO COM SUCESSO NO LOCAL " << arquivoSaida << std::endl;
+        }else {
+            std::cout << "O ARQUIVO DE ENTRADA " << arquivoEntrada << " NÃO É DO TIPO INFIXA OU POSFIXA" <<std::endl;
+        }
+        
     } catch(Erro erro){
         std::cout << erro.getMessage() << std::endl;
     } catch(...){
@@ -303,8 +308,14 @@ void implementacao(std::string arquivo){
 
 }
 int main(int argc, char *argv[]) {
-    std::string caminho = argv[1];
-    implementacao(caminho);
+    if(argc != 3){
+        std::cout << "NÃO FORAM PASSADOS OS ARQUIVOS CORRETAMENTE" << std::endl;
+        return 1;
+    }
+    std::string arquivoEntrada = argv[1];
+    std::string arquivoSaida = argv[2];
+    implementacao(arquivoEntrada, arquivoSaida);
+    return 0;
 }
 
 
